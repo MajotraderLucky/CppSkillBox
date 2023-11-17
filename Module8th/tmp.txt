@@ -1,0 +1,5 @@
+int convertFloatToInt(float number) {
+    float multipliedNumber = number * 10;
+    int convertedNumber = static_cast<int>(multipliedNumber);
+    return convertedNumber;
+}
