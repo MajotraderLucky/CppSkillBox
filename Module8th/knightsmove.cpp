@@ -1,38 +1,80 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
+#include <limits>
+
+double getDoubleFromInput() {
+  double input;
+  
+  while (true) {
+    std::cin >> input;
+    
+    // проверяем, что ввод не вызвал ошибку и что число не отрицательно
+    if (std::cin.fail() || input < 0) { 
+      std::cin.clear(); // возвращаем cin в 'обычный' режим работы
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // удаляем значения предыдущего ввода из входного буфера
+      std::cout << "Please enter a positive number:\n";
+    } else {
+      // проверяем, что дробная часть числа находится в промежутке от 0 до 7
+      int converted = static_cast<int>(input * 10) % 10;
+
+      if (converted < 0 || converted > 7) {
+        std::cout << "Please enter a number greater than or equal to 0.0 and less than or equal to 0.7:\n";
+      } else {
+        break;
+      }
+    }
+  }
+  
+  return input;
+}
+
+int convertDoubleToInt(double number) {
+  double fractionalPart = number - std::trunc(number);
+  int convertedNumber = static_cast<int>(fractionalPart * 10);
+  return convertedNumber;
+}
+
+bool isKnightMoveValid(int x1, int y1, int x2, int y2) {
+    int dx = abs(x1 - x2);
+    int dy = abs(y1 - y2);
+
+    if ((dx == 1 && dy == 2) || (dx == 2 && dy == 1)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 int main() {
-  // Запрос ввода координат коня
-  std::cout << "Введите местоположение коня:\n";
-  double knightX, knightY;
-  std::cin >> knightX >> knightY;
+   // Request for the input of the knight's coordinates
+  std::cout << "Enter the location of the knight:\n";
+  double knightX = getDoubleFromInput();
+  double knightY = getDoubleFromInput();
 
-  // Запрос ввода координат точки на доске
-  std::cout << "Введите местоположение точки на доске:\n";
-  double pointX, pointY;
-  std::cin >> pointX >> pointY;
+  std::cout << "Enter a point on the board:\n";
+  double pointX = getDoubleFromInput();
+  double pointY = getDoubleFromInput();
 
-// Преобразование координат в целочисленные значения
-int knightCellX = static_cast<int>(std::floor(knightX * 8)) + 1;
-int knightCellY = static_cast<int>(std::floor(knightY * 8)) + 1;
-int pointCellX = static_cast<int>(std::floor(pointX * 8)) + 1;
-int pointCellY = static_cast<int>(std::floor(pointY * 8)) + 1;
+    std::cout << "-----------------------" << std::endl;
 
-// Вычисление разницы между координатами коня и точки
-int diffX = std::abs(knightCellX - pointCellX);
-int diffY = std::abs(knightCellY - pointCellY);
+  std::cout << knightX << "--" << knightY << "\n";
+  std::cout << pointX << "--" << pointY << "\n";
 
-// Проверка возможности хода конём
-bool canKnightMove = (diffX == 2 && diffY == 1) || (diffX == 1 && diffY ==2);
+  int knightXint = convertDoubleToInt(knightX);
+  int knightYint = convertDoubleToInt(knightY);
+  int pointXint = convertDoubleToInt(pointX);
+  int pointYint = convertDoubleToInt(pointY);
 
-// Вывод результата
-std::cout << "\nКонь в клетке (" << knightCellX << ", " << knightCellY << ").\n"
-            << "Точка в клетке (" << pointCellX << ", " << pointCellY << ").\n";
+  std::cout << "-----------------------" << std::endl;
+  std::cout << knightXint << "--" << knightYint << "\n";
+  std::cout << pointXint << "--" << pointYint << "\n";
+  std::cout << "-----------------------" << std::endl;
 
-  if (canKnightMove) {
-    std::cout << "Да, конь может ходить в эту точку.\n";
+  if (isKnightMoveValid(knightXint, knightYint, pointXint, pointYint)) {
+    std::cout << "The knight can move to the point\n";
   } else {
-    std::cout << "Нет, конь не может ходить в эту точку.\n";
+    std::cout << "The knight cannot move to the point\n";
   }
 
   return 0;

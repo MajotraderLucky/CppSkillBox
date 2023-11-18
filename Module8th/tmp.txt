@@ -1,52 +1,31 @@
 #include <iostream>
-#include <iomanip>
-#include <cmath>
+#include <cstdlib>
 
-int convertDoubleToInt(double number) {
-  double fractionalPart = number - std::trunc(number); 
-  double tenthPart = fractionalPart * 10;
-  int convertedNumber = static_cast<int>(tenthPart);
-  return convertedNumber;
-}
+bool isKnightMoveValid(int x1, int y1, int x2, int y2) {
+    int dx = abs(x1 - x2);
+    int dy = abs(y1 - y2);
 
-double getDoubleFromInput() {
-  double input;
-  
-  while (true) {
-    std::cin >> input;
-    
-    if (std::cin.fail()) { // если предыдущее извлечение не удалось,
-      std::cin.clear(); // возвращаем cin в 'обычный' режим работы
-      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // удаляем значения предыдущего ввода из входного буфера
-      std::cout << "Пожалуйста, введите корректное число:\n";
-    } 
-    else if (input < 0) {
-      std::cout << "Пожалуйста, введите положительное число:\n";
-    } 
-    else {
-      break;
+    if ((dx == 1 && dy == 2) || (dx == 2 && dy == 1)) {
+        return true;
+    } else {
+        return false;
     }
-  }
-  
-  return input;  
 }
 
 int main() {
-  std::cout << "Введите местоположение коня:\n";
-  double knightX = getDoubleFromInput();
-  double knightY = getDoubleFromInput();
+    int x1, y1, x2, y2;
+    
+    std::cout << "Введите начальные координаты коня (x1, y1): ";
+    std::cin >> x1 >> y1;
 
-  std::cout << "Введите местоположение точки на доске:\n";
-  double pointX = getDoubleFromInput();
-  double pointY = getDoubleFromInput();
+    std::cout << "Введите координаты после хода (x2, y2): ";
+    std::cin >> x2 >> y2;
 
-  int knightXint = convertDoubleToInt(knightX);
-  int knightYint = convertDoubleToInt(knightY);
-  int pointXint = convertDoubleToInt(pointX);
-  int pointYint = convertDoubleToInt(pointY);
+    if (isKnightMoveValid(x1, y1, x2, y2)) {
+        std::cout << "Конь может сделать такой ход." << std::endl;
+    } else {
+        std::cout << "Конь не может сделать такой ход." << std::endl;
+    }
 
-  std::cout << knightXint << "--" << knightYint << "\n";
-  std::cout << pointXint << "--" << pointYint << "\n";
-
-  return 0;
+    return 0;
 }
