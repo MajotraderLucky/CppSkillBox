@@ -1,4 +1,6 @@
 #include <iostream>
+#include <limits>
+#include "photokiller.h"
 
 int main() {
     int leftBoundary, rightBoundary;
@@ -6,15 +8,23 @@ int main() {
 
     std::cout << "Введите яркость левой границы градиента: ";
     std::cin >> leftBoundary;
+    if (leftBoundary < 0 || leftBoundary > 255 || std::cin.fail()) {
+        std::cout << "Некорректный ввод." << std::endl;
+        return 1;
+    }
+    clearInputBuffer();
 
     std::cout << "Введите правую границу градиента: ";
     std::cin >> rightBoundary;
+    if (rightBoundary < 0 || rightBoundary > 255 || std::cin.fail()) {
+        std::cout << "Некорректный ввод." << std::endl;
+        return 1;
+    }
+    clearInputBuffer();
 
     std::cout << "Введите положение точки между границами: ";
     std::cin >> position;
-
-    // Проверка ввода
-    if (leftBoundary < 0 || leftBoundary > 255 || rightBoundary < 0 || rightBoundary > 255 || position < 0 || position > 1) {
+    if (!validateInput(position)) {
         std::cout << "Некорректный ввод." << std::endl;
         return 1;
     }
