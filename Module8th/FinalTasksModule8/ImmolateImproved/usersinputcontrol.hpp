@@ -7,4 +7,6 @@ bool isDigitsOnly(const std::string& input);
 
 std::string containsDigitsAndDot(const std::string& input);
 
+double convertToDouble(const std::string& input);
+
 #endif
