@@ -9,3 +9,24 @@ bool isDigitsOnly(const std::string& input) {
     }
     return true;
 }
+
+bool containsDigitsAndDot(const std::string& input) {
+    bool hasOneDot = false;
+    
+    // проверка на наличие точки в начале и в конце строки
+    if (input.front() == '.' || input.back() == '.') {
+        return false;
+    }
+
+    for (char c : input) {
+        if (std::isdigit(c)) {
+            continue;
+        } else if (c == '.' && !hasOneDot) {
+            hasOneDot = true;
+        } else {
+            return false;
+        }
+    }
+    
+    return hasOneDot;
+}
