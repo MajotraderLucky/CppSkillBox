@@ -1,0 +1,78 @@
+#include <iostream>
+#include <string>
+#include <exception>
+#include <limits>
+
+bool validateInput(const std::string& input, double& value) {
+    if (input == "стоп") {
+        return true;
+    }
+
+    try {
+        size_t pos;
+        value = std::stod(input, &pos);
+        if (pos != input.size() || value < 0 || value > 1) {
+            return false;
+        }
+    } catch (std::exception&) {
+        return false;
+    }
+
+    return true;
+}
+
+int main() {
+    double health, resistance, power;
+
+    std::cout << "Введите количество здоровья орка (от 0 до 1): ";
+    std::string input;
+    std::getline(std::cin, input);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    while (!validateInput(input, health)) {
+        std::cout << "Ошибка! Количество здоровья должно быть числом от 0 до 1. Попробуйте ещё раз или введите 'стоп' для завершения программы.\n";
+        std::getline(std::cin, input);
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        if (input == "стоп") {
+            std::cout << "Программа завершена." << std::endl;
+            return 0;
+        }
+    }
+
+    std::cout << "Введите сопротивляемость магии орка (от 0 до 1): ";
+    std::getline(std::cin, input);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    while (!validateInput(input, resistance)) {
+        std::cout << "Ошибка! Сопротивляемость магии должна быть числом от 0 до 1. Попробуйте ещё раз или введите 'стоп' для завершения программы.\n";
+        std::getline(std::cin, input);
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        if (input == "стоп") {
+            std::cout << "Программа завершена." << std::endl;
+            return 0;
+        }
+    }
+
+    while (health > 0) {
+        std::cout << "Введите мощность огненного шара (от 0 до 1): ";
+        std::getline(std::cin, input);
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        if (!validateInput(input, power)) {
+            std::cout << "Ошибка! Мощность должна быть числом от 0 до 1. Попробуйте ещё раз или введите 'стоп' для завершения программы.\n";
+            continue;
+        }
+
+        double damage = power * (1 - resistance);
+        health -= damage;
+
+        std::cout << "Нанесенный урон: " << damage << std::endl;
+        std::cout << "Оставшиеся очки здоровья орка: " << health << std::endl;
+    }
+
+    std::cout << "Орк погиб!" << std::endl;
+
+    return 0;
+}
