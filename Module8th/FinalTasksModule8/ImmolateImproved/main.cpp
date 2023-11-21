@@ -11,12 +11,22 @@ int main() {
 
 if (isDigitsOnly(userInput)) {
     std::cout << "Строка состоит только из цифр.\n";
-    int numberInt = std::atoi(userInput.c_str());
-    std::cout << "Строка была преобразована в int: " << numberInt << "\n";
+    double number = convertToDouble(userInput);
+    bool insideTheRange = isInRange(number, 0.000001, 1.0);
+    if (insideTheRange) {
+        std::cout << "Введенное число в диапазоне от 0.000001 до 1.0\n";
+    } else {
+        std::cout << "Введенное число не в диапазоне от 0.000001 до 1.0\n";
+    }
 } else if (!containsDigitsAndDot(userInput).empty()) {
     std::cout << "Строка содержит цифры и точку.\n";
     double value = convertToDouble(userInput);
-    std::cout << "Строка была преобразована в double: " << value << "\n";
+    bool insideTheRange = isInRange(value, 0.000001, 1.0);
+    if (insideTheRange) {
+        std::cout << "Введенное число в диапазоне от 0.000001 до 1.0\n";
+    } else {
+        std::cout << "Введенное число не в диапазоне от 0.000001 до 1.0\n";
+    }
 } else {
     std::cout << "Строка содержит символы, отличные от цифр и точки.\n";
 }

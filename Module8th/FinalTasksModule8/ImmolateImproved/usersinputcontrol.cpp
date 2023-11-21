@@ -1,5 +1,7 @@
 #include "usersinputcontrol.hpp"
 #include <cctype> // for isdigit() function
+#include <iostream>
+#include <string>
 
 bool isDigitsOnly(const std::string& input) {
     for (char c : input) {
@@ -50,5 +52,12 @@ double convertToDouble(const std::string& input) {
         // В данном примере вернем 0.
         return 0.0;
     }
+}
+
+bool isInRange(double number, double lowerBound, double upperBound) {
+    if (number >= lowerBound && number <= upperBound) {
+        return true;
+    }
+    return false;
 }
 
