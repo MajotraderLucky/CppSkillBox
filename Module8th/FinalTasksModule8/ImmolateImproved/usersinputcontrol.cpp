@@ -10,12 +10,12 @@ bool isDigitsOnly(const std::string& input) {
     return true;
 }
 
-bool containsDigitsAndDot(const std::string& input) {
+std::string containsDigitsAndDot(const std::string& input) {
     bool hasOneDot = false;
     
     // проверка на наличие точки в начале и в конце строки
     if (input.front() == '.' || input.back() == '.') {
-        return false;
+        return "";
     }
 
     for (char c : input) {
@@ -24,9 +24,13 @@ bool containsDigitsAndDot(const std::string& input) {
         } else if (c == '.' && !hasOneDot) {
             hasOneDot = true;
         } else {
-            return false;
+            return "";
         }
     }
     
-    return hasOneDot;
+    if (hasOneDot)
+        return input;
+
+    return "";  // Возвращаем пустую строку, если в строке нет точки
 }
+
