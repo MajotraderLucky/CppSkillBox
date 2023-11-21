@@ -1,15 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cctype> // Для функции isdigit()
-
-bool isDigitsOnly(const std::string& input) {
-    for (char c : input) {
-        if (!std::isdigit(c)) {
-            return false;
-        }
-    }
-    return true;
-}
+#include "usersinputcontrol.hpp"
 
 int main() {
     std::string userInput;
