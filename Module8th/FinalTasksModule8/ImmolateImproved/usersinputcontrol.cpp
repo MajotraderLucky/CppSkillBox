@@ -2,6 +2,7 @@
 #include <cctype> // for isdigit() function
 #include <iostream>
 #include <string>
+#include <utility>
 
 bool isDigitsOnly(const std::string& input) {
     size_t start = 0;
@@ -75,29 +76,28 @@ bool compareStrings(const std::string& str1, const std::string& str2) {
     return str1 == str2;
 }
 
-void processUserInput(const std::string& userInput) {
+std::pair<double, bool> processUserInput(const std::string& userInput) {
+    double number = 0.0;
+    bool stopCommand = false;
+
     if (isDigitsOnly(userInput)) {
-        double number = convertToDouble(userInput);
-        bool insideTheRange = isInRange(number, 0.000001, 1.0);
-        if (insideTheRange) {
-            std::cout << "Введенное число в диапазоне от 0.000001 до 1.0\n";
-        } else {
-            std::cout << "Введенное число не в диапазоне от 0.000001 до 1.0\n";
+        number = convertToDouble(userInput);
+        if (isInRange(number, 0.0001, 1.0)) {
+            return std::make_pair(number, stopCommand);
         }
     } else if (!containsDigitsAndDot(userInput).empty()) {
-        double value = convertToDouble(userInput);
-        bool insideTheRange = isInRange(value, 0.000001, 1.0);
-        if (insideTheRange) {
-            std::cout << "Введенное число в диапазоне от 0.000001 до 1.0\n";
-        } else {
-            std::cout << "Введенное число не в диапазоне от 0.000001 до 1.0\n";
+        number = convertToDouble(userInput);
+        if (isInRange(number, 0.0001, 1.0)) {
+            return std::make_pair(number, stopCommand);
         }
-    } else {
-        bool stopCommand = compareStrings(userInput, "stop");
-        if (!stopCommand) {
-            std::cout << "Строка не является числом.\n";
-        } else if (stopCommand) {
-            std::cout << "Введена команда \"stop\"\n";
-        }
+    } else if (compareStrings(userInput, "stop")) {
+        stopCommand = true;
     }
+
+    return std::make_pair(0.0, stopCommand);
+}
+
+void printResult(const std::pair<double, bool>& result) {
+    std::cout << "Number: " << result.first << std::endl;
+    std::cout << "Stop Command: " << (result.second ? "true" : "false") << std::endl;
 }

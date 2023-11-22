@@ -1,0 +1,8 @@
+int main() {
+    // Пример использования функции processUserInput и вывод результата в консоль
+    std::string userInput = "0.5";
+    std::pair<double, bool> result = processUserInput(userInput);
+    printResult(result);
+
+    return 0;
+}
