@@ -11,4 +11,6 @@ double convertToDouble(const std::string& input);
 
 bool isInRange(double number, double lowerBound, double upperBound);
 
+bool compareStrings(const std::string& str1, const std::string& str2);
+
 #endif

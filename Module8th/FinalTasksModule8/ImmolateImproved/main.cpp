@@ -28,7 +28,12 @@ if (isDigitsOnly(userInput)) {
         std::cout << "Введенное число не в диапазоне от 0.000001 до 1.0\n";
     }
 } else {
-    std::cout << "Строка содержит символы, отличные от цифр и точки.\n";
+        bool stopCommand = compareStrings(userInput, "stop");
+    if (!stopCommand) {
+    std::cout << "Строка не является числом.\n";
+    } else if (stopCommand) {
+        std::cout << "Введена команда \"stop\"\n";
+    }
 }
 
     return 0;
