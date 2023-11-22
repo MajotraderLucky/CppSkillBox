@@ -4,8 +4,13 @@
 #include <string>
 
 bool isDigitsOnly(const std::string& input) {
-    for (char c : input) {
-        if (!std::isdigit(c)) {
+    size_t start = 0;
+    if (!input.empty() && input.front() == '-') {
+        start = 1;
+    }
+
+    for (size_t i = start; i < input.size(); i++) {
+        if (!std::isdigit(input[i])) {
             return false;
         }
     }
@@ -15,15 +20,20 @@ bool isDigitsOnly(const std::string& input) {
 std::string containsDigitsAndDot(const std::string& input) {
     bool hasOneDot = false;
     
+    size_t start = 0;
+    if (!input.empty() && input.front() == '-') {
+        start = 1;
+    }
+
     // проверка на наличие точки в начале и в конце строки
-    if (input.front() == '.' || input.back() == '.') {
+    if (input[start] == '.' || input.back() == '.') {
         return "";
     }
 
-    for (char c : input) {
-        if (std::isdigit(c)) {
+    for (size_t i = start; i < input.size(); i++) {
+        if (std::isdigit(input[i])) {
             continue;
-        } else if (c == '.' && !hasOneDot) {
+        } else if (input[i] == '.' && !hasOneDot) {
             hasOneDot = true;
         } else {
             return "";
@@ -63,4 +73,31 @@ bool isInRange(double number, double lowerBound, double upperBound) {
 
 bool compareStrings(const std::string& str1, const std::string& str2) {
     return str1 == str2;
+}
+
+void processUserInput(const std::string& userInput) {
+    if (isDigitsOnly(userInput)) {
+        double number = convertToDouble(userInput);
+        bool insideTheRange = isInRange(number, 0.000001, 1.0);
+        if (insideTheRange) {
+            std::cout << "Введенное число в диапазоне от 0.000001 до 1.0\n";
+        } else {
+            std::cout << "Введенное число не в диапазоне от 0.000001 до 1.0\n";
+        }
+    } else if (!containsDigitsAndDot(userInput).empty()) {
+        double value = convertToDouble(userInput);
+        bool insideTheRange = isInRange(value, 0.000001, 1.0);
+        if (insideTheRange) {
+            std::cout << "Введенное число в диапазоне от 0.000001 до 1.0\n";
+        } else {
+            std::cout << "Введенное число не в диапазоне от 0.000001 до 1.0\n";
+        }
+    } else {
+        bool stopCommand = compareStrings(userInput, "stop");
+        if (!stopCommand) {
+            std::cout << "Строка не является числом.\n";
+        } else if (stopCommand) {
+            std::cout << "Введена команда \"stop\"\n";
+        }
+    }
 }

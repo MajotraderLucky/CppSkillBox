@@ -13,4 +13,6 @@ bool isInRange(double number, double lowerBound, double upperBound);
 
 bool compareStrings(const std::string& str1, const std::string& str2);
 
+void processUserInput(const std::string& userInput);
+
 #endif
