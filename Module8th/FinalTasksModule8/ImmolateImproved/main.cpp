@@ -5,16 +5,29 @@
 
 int main() {
     std::string userInput;
+    double number;
+    bool stopCommand;
 
-    std::cout << "Введите количество здоровья орка (от 0.0001 до 1): ";
-    std::getline(std::cin, userInput);
+    do {
+        std::cout << "Введите количество здоровья орка (от 0.0001 до 1): ";
+        std::getline(std::cin, userInput);
 
-    std::pair<double, bool> result = processUserInput(userInput);
-    printResult(result);
+        std::pair<double, bool> result = processUserInput(userInput);
+        printResult(result);
 
-    std::pair<double, bool> values = processUserInput(userInput);
-    double number = values.first;
-    bool stopCommand = values.second;
+        number = result.first;
+        stopCommand = result.second;
+
+        if (stopCommand == 1) {
+            std::cout << "Программа завершена!" << std::endl;
+            return 0;
+        }
+
+        if (number == 0) {
+            std::cout << "Ошибка! Количество здоровья должно быть числом от 0.0001 до 1. Для завершения программы введите 'stop'" << std::endl;
+        }
+
+    } while (number == 0);
 
     std::cout << " Получено число: " << number << std::endl;
     std::cout << " Получена строка: " << stopCommand << std::endl;
