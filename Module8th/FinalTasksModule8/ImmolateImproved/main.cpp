@@ -12,5 +12,12 @@ int main() {
     std::pair<double, bool> result = processUserInput(userInput);
     printResult(result);
 
+    std::pair<double, bool> values = processUserInput(userInput);
+    double number = values.first;
+    bool stopCommand = values.second;
+
+    std::cout << " Получено число: " << number << std::endl;
+    std::cout << " Получена строка: " << stopCommand << std::endl;
+
     return 0;
 }
