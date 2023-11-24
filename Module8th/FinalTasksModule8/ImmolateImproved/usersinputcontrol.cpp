@@ -101,3 +101,33 @@ void printResult(const std::pair<double, bool>& result) {
     std::cout << "Number: " << result.first << std::endl;
     std::cout << "Stop Command: " << (result.second ? "true" : "false") << std::endl;
 }
+
+std::pair<double, bool> getUserInput(
+    const std::string& prompt, 
+    double min, double max, 
+    const std::string& errorMsg) 
+{
+    std::string userInput;
+    std::pair<double, bool> result;
+
+    do {
+        std::cout << prompt;
+        std::getline(std::cin, userInput);
+
+        result = processUserInput(userInput);
+
+        if (result.second) { // Проверяем stopCommand
+            return result;
+        }
+
+        if (result.first < min || result.first > max) {
+            std::cout << errorMsg;
+            // Устанавливаем result.first в 0, чтобы while продолжил цикл
+            result.first = 0;
+        }
+
+    } while (result.first == 0);
+
+    return result;
+}
+

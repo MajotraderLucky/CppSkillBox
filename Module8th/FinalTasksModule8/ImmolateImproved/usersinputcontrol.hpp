@@ -17,4 +17,9 @@ std::pair<double, bool> processUserInput(const std::string& userInput);
 
 void printResult(const std::pair<double, bool>& result);
 
+std::pair<double, bool> getUserInput(
+    const std::string& prompt, 
+    double min, double max, 
+    const std::string& errorMsg);
+
 #endif
