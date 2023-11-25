@@ -24,17 +24,27 @@ int main() {
     if (userInput.second) return 0;
     resistance = userInput.first;
 
-    userInput = getUserInput(
-        "Введите мощность магического шара (от 0.0001 до 1): ",
-        0.0001, 1,
-        "Ошибка! Мощность магического шара должна быть числом от 0.0001 до 1. Для завершения программы введите 'stop'\n"
-    );
-    if (userInput.second) return 0;
-    ballPower = userInput.first;
+    while (health > 0) {
 
-    std::cout << "Здоровье орка: " << health << "\n";
-    std::cout << "Сопротивляемость магии орка: " << resistance << "\n";
-    std::cout << "Мощность магического шара: " << ballPower << "\n";
+        userInput = getUserInput(
+            "Введите мощность магического шара (от 0.0001 до 1): ",
+            0.0001, 1,
+            "Ошибка! Мощность магического шара должна быть числом от 0.0001 до 1. Для завершения программы введите 'stop'\n"
+        );
+        if (userInput.second) return 0;
+        ballPower = userInput.first;
+
+        std::cout << "Здоровье орка: " << health << "\n";
+        std::cout << "Сопротивляемость магии орка: " << resistance << "\n";
+        std::cout << "Мощность магического шара: " << ballPower << "\n";
+
+        double damage = ballPower * (1 - resistance);
+        health -= damage;
+        std::cout << "Нанесенный урон: " << damage << std::endl;
+        std::cout << "Оставшиеся очки здоровья орка: " << health << std::endl;
+    }
+
+    std::cout << "Орк погиб!" << std::endl;
 
     return 0;
 }
