@@ -9,7 +9,16 @@ add_subdirectory(/usr/src/googletest googletest-build)
 # Указываем включить заголовочные файлы Google Test
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-add_executable(ImmolateImproved main.cpp usersinputcontrol.cpp unittests/usersinputcontrol_unittests.cpp)
+enable_testing()
 
-# Связываем наш исполняемый файл с библиотеками Google Test
-target_link_libraries(ImmolateImproved gtest gtest_main)
+# Создаем исполняемый файл для основной программы
+add_executable(ImmolateImproved main.cpp usersinputcontrol.cpp)
+
+# Создаем исполняемый файл для тестов
+add_executable(ImmolateImprovedTests unittests/usersinputcontrol_unittests.cpp usersinputcontrol.cpp)
+
+# Связываем тестовый исполняемый файл с библиотеками Google Test
+target_link_libraries(ImmolateImprovedTests gtest gtest_main)
+
+# Добавляем тесты
+add_test(NAME ImmolateImprovedTest COMMAND ImmolateImprovedTests)
