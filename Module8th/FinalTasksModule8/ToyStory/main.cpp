@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <cctype> // Для функции isdigit()
+#include <complex>
 #include "usersinputcontrol.h"
 
 int main() {
@@ -35,6 +35,12 @@ int main() {
     std::cout << "Толщина бруска см: " << x << std::endl;
     std::cout << "Длина бруска см: " << y << std::endl;
     std::cout << "Ширина бруска см: " << z << std::endl;
+
+    int num_cubes = (int)(x / 5) * (int)(y / 5) * (int)(z / 5);
+    std::cout << "Из этого бруска можно изготовить " << num_cubes << " кубиков.\n";
+
+    int max_set_size = pow((int)cbrt(num_cubes), 3);
+    std::cout << "Из них можно составить набор из " << max_set_size << " кубиков.\n";
 
     return 0;
 }
