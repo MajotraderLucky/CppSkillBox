@@ -4,4 +4,6 @@ project(KenyanRunner)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(KenyanRunner
-        main.cpp)
+        main.cpp
+        usersinputcontrol.cpp
+)
