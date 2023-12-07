@@ -18,21 +18,23 @@ int main() {
     if (userInput.second) return 0;
     distanceKm = userInput.first;
     countKm = 1;
+    double distanceMeters = distanceKm * 1000; // Конвертация в метры
+    int roundedDistance = static_cast<int>(std::round(distanceMeters));
 
     if (distanceKm < 1) {
         userInput = getUserInput(
-                "Какой у тебя был темп на этой дистанции " + std::to_string(distanceKm) + "?-> ",
+                "Какой у тебя был темп на этой дистанции " + std::to_string(roundedDistance) + " м ?-> ",
                 0.1, 1000,
-                "Ошибка: вы ввели некорректные данные. Для завершения программы введите'stop'\n"
+                "Ошибка: вы ввели некорректные данные. Для завершения программы введите 'stop'\n"
         );
         if (userInput.second) return 0;
-        finishTimeSec = userInput.first;
+        finishTimeSec = userInput.first * distanceKm; // Calculate finish time for the entire run
     } else {
         do {
             userInput = getUserInput(
                     "Какой у тебя был темп на километре " + std::to_string(countKm) + "?-> ",
                     0.1, 1000,
-                    "Ошибка: вы ввели некорректные данные. Для завершения программы введите'stop'\n"
+                    "Ошибка: вы ввели некорректные данные. Для завершения программы введите 'stop'\n"
             );
             if (userInput.second) return 0;
             finishTimeSec += userInput.first;
@@ -40,20 +42,10 @@ int main() {
         } while (countKm <= distanceKm);
     }
 
-
-
-    std::cout << "Количество километров, которое ты сегодня пробежал: " << distanceKm  << " километра" << std::endl;
-    std::cout << "Количество секунд, за которые  ты сегодня пробежал дистанцию: " << finishTimeSec << std::endl;
-
-    int minutes = int(finishTimeSec) / 60;
-    int seconds = int(finishTimeSec) % 60;
-
     double averagePace = finishTimeSec / distanceKm;
 
-    std::cout << "Ты пробежал дистанцию за : " << minutes << " минут " << seconds << " секунд" << std::endl;
-
-    minutes = static_cast<int>(averagePace) / 60;
-    seconds = static_cast<int>(round(averagePace)) % 60;
+    int minutes = static_cast<int>(averagePace) / 60;
+    int seconds = static_cast<int>(round(averagePace)) % 60;
 
     std::cout << "Твой средний темп за тренировку: " << minutes << " минуты " << seconds << " секунд" << std::endl;
 
