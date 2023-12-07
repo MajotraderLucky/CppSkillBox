@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 #include "usersinputcontrol.h"
 
 int main() {
@@ -51,8 +52,8 @@ int main() {
 
     std::cout << "Ты пробежал дистанцию за : " << minutes << " минут " << seconds << " секунд" << std::endl;
 
-    minutes = int(averagePace) / 60;
-    seconds = int(averagePace) % 60;
+    minutes = static_cast<int>(averagePace) / 60;
+    seconds = static_cast<int>(round(averagePace)) % 60;
 
     std::cout << "Твой средний темп за тренировку: " << minutes << " минуты " << seconds << " секунд" << std::endl;
 
