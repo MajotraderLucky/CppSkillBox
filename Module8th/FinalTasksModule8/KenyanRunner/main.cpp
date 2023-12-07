@@ -41,8 +41,20 @@ int main() {
 
 
 
-    std::cout << "Количество километров, которое ты сегодня пробежал: " << distanceKm  << "километра" << std::endl;
+    std::cout << "Количество километров, которое ты сегодня пробежал: " << distanceKm  << " километра" << std::endl;
     std::cout << "Количество секунд, за которые  ты сегодня пробежал дистанцию: " << finishTimeSec << std::endl;
+
+    int minutes = int(finishTimeSec) / 60;
+    int seconds = int(finishTimeSec) % 60;
+
+    double averagePace = finishTimeSec / distanceKm;
+
+    std::cout << "Ты пробежал дистанцию за : " << minutes << " минут " << seconds << " секунд" << std::endl;
+
+    minutes = int(averagePace) / 60;
+    seconds = int(averagePace) % 60;
+
+    std::cout << "Твой средний темп за тренировку: " << minutes << " минуты " << seconds << " секунд" << std::endl;
 
     return 0;
 }
