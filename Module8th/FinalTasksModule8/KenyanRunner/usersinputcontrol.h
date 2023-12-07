@@ -20,4 +20,6 @@ std::pair<double, bool> getUserInput(
         double min, double max,
         const std::string& errorMsg);
 
+std::pair<double, bool> getUserInputWithValidation(const std::string& prompt, double min, double max, const std::string& errorMessage);
+
 #endif

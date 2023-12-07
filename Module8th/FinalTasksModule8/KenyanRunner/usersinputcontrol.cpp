@@ -126,3 +126,16 @@ std::pair<double, bool> getUserInput(
 
     return result;
 }
+
+// Функция для получения ввода пользователя с проверкой на корректность данных
+std::pair<double, bool> getUserInputWithValidation(const std::string& prompt, double min, double max, const std::string& errorMessage) {
+    std::pair<double, bool> userInput;
+    userInput = getUserInput(prompt, min, max, errorMessage);
+
+    if (userInput.second) {
+        std::cout << "Программа завершена." << std::endl;
+        exit(0);
+    }
+
+    return userInput;
+}
