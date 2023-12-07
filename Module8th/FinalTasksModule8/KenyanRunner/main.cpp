@@ -3,7 +3,9 @@
 #include "usersinputcontrol.h"
 
 int main() {
-    double km, sec;
+    double distanceKm, finishTimeSec;
+    finishTimeSec = 0.0;
+    int countKm;
 
     std::pair<double, bool> userInput;
     userInput = getUserInput(
@@ -13,33 +15,34 @@ int main() {
     );
 
     if (userInput.second) return 0;
-    km = userInput.first;
+    distanceKm = userInput.first;
+    countKm = 1;
 
-    if (km < 1) {
+    if (distanceKm < 1) {
         userInput = getUserInput(
-                "Какой у тебя был темп на этой дистанции " + std::to_string(km) + "?-> ",
+                "Какой у тебя был темп на этой дистанции " + std::to_string(distanceKm) + "?-> ",
                 0.1, 1000,
                 "Ошибка: вы ввели некорректные данные. Для завершения программы введите'stop'\n"
         );
         if (userInput.second) return 0;
-        sec = userInput.first;
+        finishTimeSec = userInput.first;
     } else {
         do {
             userInput = getUserInput(
-                    "Какой у тебя был темп на километре " + std::to_string(km) + "?-> ",
+                    "Какой у тебя был темп на километре " + std::to_string(countKm) + "?-> ",
                     0.1, 1000,
                     "Ошибка: вы ввели некорректные данные. Для завершения программы введите'stop'\n"
             );
             if (userInput.second) return 0;
-            sec = userInput.first;
-            --km;
-        } while (km > 0);
+            finishTimeSec += userInput.first;
+            ++countKm;
+        } while (countKm <= distanceKm);
     }
 
 
 
-    std::cout << "Количество километров, которое ты сегодня пробежал: " << km << std::endl;
-    std::cout << "Количество секунд, за которые  ты сегодня пробежал дистанцию: " << sec << std::endl;
+    std::cout << "Количество километров, которое ты сегодня пробежал: " << distanceKm  << "километра" << std::endl;
+    std::cout << "Количество секунд, за которые  ты сегодня пробежал дистанцию: " << finishTimeSec << std::endl;
 
     return 0;
 }
