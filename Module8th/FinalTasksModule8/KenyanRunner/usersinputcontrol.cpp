@@ -2,9 +2,7 @@
 #include <cctype> // for isdigit() function
 #include <iostream>
 #include <string>
-#include <utility>
 #include <vector>
-#include <cmath>
 
 bool isDigitsOnly(const std::string& input) {
     size_t start = 0;
@@ -96,60 +94,4 @@ void processUserInput(const std::string& prompt, double min, double max, const s
 
         std::cout << errorMessage;
     }
-}
-
-
-void printResult(const std::pair<double, bool>& result) {
-    std::cout << "Number: " << result.first << std::endl;
-    std::cout << "Stop Command: " << (result.second ? "true" : "false") << std::endl;
-}
-
-void getUserInput(
-        const std::string& prompt,
-        double min, double max,
-        const std::string& errorMsg,
-        double& output)
-{
-    std::string userInput;
-    bool isStopCommand;
-
-    do {
-        std::cout << prompt;
-        std::getline(std::cin, userInput);
-
-        try {
-            processUserInput(userInput, min, max, errorMsg, output);
-            isStopCommand = false;
-        } catch (const std::runtime_error& e) {
-            std::cerr << e.what() << std::endl;
-            isStopCommand = true;
-        }
-
-    } while (isStopCommand);
-}
-
-
-// Функция для получения ввода пользователя с проверкой на корректность данных
-void getUserInputWithValidation(
-        const std::string& prompt,
-        double min, double max,
-        const std::string& errorMsg,
-        double& output)
-{
-    std::string userInput;
-    bool isStopCommand;
-
-    do {
-        std::cout << prompt;
-        std::getline(std::cin, userInput);
-
-        try {
-            processUserInput(userInput, min, max, errorMsg, output);
-            isStopCommand = false;
-        } catch (const std::runtime_error& e) {
-            std::cerr << e.what() << std::endl;
-            isStopCommand = true;
-        }
-
-    } while (isStopCommand);
 }

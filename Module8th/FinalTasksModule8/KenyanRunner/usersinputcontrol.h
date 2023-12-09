@@ -15,16 +15,4 @@ bool compareStrings(const std::string& str1, const std::string& str2);
 
 void processUserInput(const std::string& prompt, double min, double max, const std::string& errorMessage, double& output);
 
-void getUserInput(
-        const std::string& prompt,
-        double min, double max,
-        const std::string& errorMsg,
-        double& output);
-
-void getUserInputWithValidation(
-        const std::string& prompt,
-        double min, double max,
-        const std::string& errorMsg,
-        double& output);
-
 #endif
