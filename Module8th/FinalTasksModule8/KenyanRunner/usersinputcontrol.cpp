@@ -72,70 +72,84 @@ bool compareStrings(const std::string& str1, const std::string& str2) {
     return str1 == str2;
 }
 
-std::pair<double, bool> processUserInput(const std::string& userInput) {
-    double number = 0.0;
-    bool stopCommand = false;
+void processUserInput(const std::string& prompt, double min, double max, const std::string& errorMessage, double& output) {
+    while (true) {
+        std::cout << prompt;
+        std::string userInput;
+        std::cin >> userInput;
 
-    if (isDigitsOnly(userInput)) {
-        number = convertToDouble(userInput);
-        if (isInRange(number, 0.1, 1000)) {
-            return std::make_pair(number, stopCommand);
+        if (isDigitsOnly(userInput)) {
+            double number = convertToDouble(userInput);
+            if (isInRange(number, min, max)) {
+                output = number;
+                return;
+            }
+        } else if (!containsDigitsAndDot(userInput).empty()) {
+            double number = convertToDouble(userInput);
+            if (isInRange(number, min, max)) {
+                output = number;
+                return;
+            }
+        } else if (compareStrings(userInput, "stop")) {
+            throw std::runtime_error("Программа завершена.");
         }
-    } else if (!containsDigitsAndDot(userInput).empty()) {
-        number = convertToDouble(userInput);
-        if (isInRange(number, 0.1, 1000)) {
-            return std::make_pair(number, stopCommand);
-        }
-    } else if (compareStrings(userInput, "stop")) {
-        stopCommand = true;
+
+        std::cout << errorMessage;
     }
-
-    return std::make_pair(0.0, stopCommand);
 }
+
 
 void printResult(const std::pair<double, bool>& result) {
     std::cout << "Number: " << result.first << std::endl;
     std::cout << "Stop Command: " << (result.second ? "true" : "false") << std::endl;
 }
 
-std::pair<double, bool> getUserInput(
+void getUserInput(
         const std::string& prompt,
         double min, double max,
-        const std::string& errorMsg)
+        const std::string& errorMsg,
+        double& output)
 {
     std::string userInput;
-    std::pair<double, bool> result;
+    bool isStopCommand;
 
     do {
         std::cout << prompt;
         std::getline(std::cin, userInput);
 
-        result = processUserInput(userInput);
-
-        if (result.second) { // Проверяем stopCommand
-            return result;
+        try {
+            processUserInput(userInput, min, max, errorMsg, output);
+            isStopCommand = false;
+        } catch (const std::runtime_error& e) {
+            std::cerr << e.what() << std::endl;
+            isStopCommand = true;
         }
 
-        if (result.first < min || result.first > max) {
-            std::cout << errorMsg;
-            // Устанавливаем result.first в 0, чтобы while продолжил цикл
-            result.first = 0;
-        }
-
-    } while (result.first == 0);
-
-    return result;
+    } while (isStopCommand);
 }
 
+
 // Функция для получения ввода пользователя с проверкой на корректность данных
-std::pair<double, bool> getUserInputWithValidation(const std::string& prompt, double min, double max, const std::string& errorMessage) {
-    std::pair<double, bool> userInput;
-    userInput = getUserInput(prompt, min, max, errorMessage);
+void getUserInputWithValidation(
+        const std::string& prompt,
+        double min, double max,
+        const std::string& errorMsg,
+        double& output)
+{
+    std::string userInput;
+    bool isStopCommand;
 
-    if (userInput.second) {
-        std::cout << "Программа завершена." << std::endl;
-        exit(0);
-    }
+    do {
+        std::cout << prompt;
+        std::getline(std::cin, userInput);
 
-    return userInput;
+        try {
+            processUserInput(userInput, min, max, errorMsg, output);
+            isStopCommand = false;
+        } catch (const std::runtime_error& e) {
+            std::cerr << e.what() << std::endl;
+            isStopCommand = true;
+        }
+
+    } while (isStopCommand);
 }

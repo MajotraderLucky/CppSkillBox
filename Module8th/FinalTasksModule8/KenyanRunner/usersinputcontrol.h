@@ -13,13 +13,18 @@ bool isInRange(double number, double lowerBound, double upperBound);
 
 bool compareStrings(const std::string& str1, const std::string& str2);
 
-std::pair<double, bool> processUserInput(const std::string& userInput);
+void processUserInput(const std::string& prompt, double min, double max, const std::string& errorMessage, double& output);
 
-std::pair<double, bool> getUserInput(
+void getUserInput(
         const std::string& prompt,
         double min, double max,
-        const std::string& errorMsg);
+        const std::string& errorMsg,
+        double& output);
 
-std::pair<double, bool> getUserInputWithValidation(const std::string& prompt, double min, double max, const std::string& errorMessage);
+void getUserInputWithValidation(
+        const std::string& prompt,
+        double min, double max,
+        const std::string& errorMsg,
+        double& output);
 
 #endif

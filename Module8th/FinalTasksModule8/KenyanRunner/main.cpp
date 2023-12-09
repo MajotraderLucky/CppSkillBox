@@ -8,33 +8,51 @@ int main() {
     finishTimeSec = 0.0;
     int countKm;
 
-    std::pair<double, bool> userInput;
-    userInput = getUserInputWithValidation(
-            "Привет, Сэм! Сколько километров ты сегодня пробежал?-> ",
-            0.1, 100,
-            "Ошибка: вы ввели некорректные данные. Для завершения программы введите 'stop'\n"
-    );
+    try {
+        processUserInput(
+                "Привет, Сэм! Сколько километров ты сегодня пробежал?-> ",
+                0.1, 100,
+                "Ошибка: вы ввели некорректные данные. Для завершения программы введите 'stop'\n",
+                distanceKm
+        );
+    } catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+        return 1;
+    }
 
-    distanceKm = userInput.first;
     countKm = 1;
     double distanceMeters = distanceKm * 1000; // Конвертация в метры
     int roundedDistance = static_cast<int>(std::round(distanceMeters));
 
     if (distanceKm < 1) {
-        userInput = getUserInputWithValidation(
-                "Какой у тебя был темп на этой дистанции " + std::to_string(roundedDistance) + " м ?-> ",
-                0.1, 1000,
-                "Ошибка: вы ввели некорректные данные. Для завершения программы введите 'stop'\n"
-        );
-        finishTimeSec = userInput.first * distanceKm; // Calculate finish time for the entire run
+        try {
+            double pacePerKm;
+            processUserInput(
+                    "Какой у тебя был темп на этой дистанции " + std::to_string(roundedDistance) + " м ?-> ",
+                    0.1, 1000,
+                    "Ошибка: вы ввели некорректные данные. Для завершения программы введите 'stop'\n",
+                    pacePerKm
+            );
+            finishTimeSec = pacePerKm * distanceKm; // Calculate finish time for the entire run
+        } catch (const std::exception& e) {
+            std::cout << e.what() << std::endl;
+            return 1;
+        }
     } else {
         do {
-            userInput = getUserInputWithValidation(
-                    "Какой у тебя был темп на километре " + std::to_string(countKm) + "?-> ",
-                    0.1, 1000,
-                    "Ошибка: вы ввели некорректные данные. Для завершения программы введите 'stop'\n"
-            );
-            finishTimeSec += userInput.first;
+            double pacePerKm;
+            try {
+                processUserInput(
+                        "Какой у тебя был темп на километре " + std::to_string(countKm) + "?-> ",
+                        0.1, 1000,
+                        "Ошибка: вы ввели некорректные данные. Для завершения программы введите 'stop'\n",
+                        pacePerKm
+                );
+            } catch (const std::exception& e) {
+                std::cout << e.what() << std::endl;
+                return 1;
+            }
+            finishTimeSec += pacePerKm;
             ++countKm;
         } while (countKm <= distanceKm);
     }
