@@ -4,4 +4,6 @@ project(Pendulum)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Pendulum
-        main.cpp)
+        main.cpp
+        usersinputcontrol.h
+        usersinputcontrol.cpp)
