@@ -37,5 +37,13 @@ int main() {
         std::cerr << "Вы ввели 'stop': " << e.what() << std::endl;
     }
 
+    int swings = 0; // счетчик качаний
+    while (initialAmplitude > finalAmplitude) {
+        initialAmplitude *= 0.916; // уменьшаем амплитуду на 8.4%
+        swings++; // увеличиваем счетчик качаний
+    }
+
+    std::cout << "Маятник качнется " << swings << " раз, прежде чем остановится." << std::endl;
+
     return 0;
 }
