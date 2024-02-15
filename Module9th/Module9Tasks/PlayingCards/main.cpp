@@ -1,8 +1,5 @@
 #include <iostream>
-
-bool isValidCard(char card) {
-  return (card >= '0' && card <= '9') || (card == 'J') || (card == 'Q') || (card == 'K') || (card == 'A');
-}
+#include "playingcards.h"
 
 int main() {
   char firstCard, secondCard;
