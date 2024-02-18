@@ -39,6 +39,8 @@ int main() {
       std::cout << "The first card is bigger" << std::endl;
     } else if (secondCardIsBigger) {
       std::cout << "The second card is bigger" << std::endl;
+    } else if (firstCardIndex == secondCardIndex) {
+      std::cout << "The cards are equal" << std::endl;
     }
   } else {
     std::cout << "Error: one of the cards is incorrect" << std::endl;
