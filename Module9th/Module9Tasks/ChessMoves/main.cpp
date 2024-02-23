@@ -1,20 +1,24 @@
 #include <iostream>
 
+bool isOnBoard(char letter, int number) {
+  char letter_coordinat[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+  int count = 0;
+  for (int i = 0; i < 8; i++) {
+    if (letter_coordinat[i] != letter) {
+      count++;
+    }
+  }
+
+  return !(count == 8 || number < 1 || number > 8);
+}
+
 int main() {
   std::cout << "Enter a start point on the chess board" << std::endl;
   char letterStartPoint;
   int numberStartPoint;
   std::cin >> letterStartPoint >> numberStartPoint;
 
-  char letter_coordinat[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-  int count = 0;
-  for (int i = 0; i < 8; i++) {
-    if (letter_coordinat[i] != letterStartPoint) {
-      count++;
-    }
-  }
-
-  if ((count == 8) || (numberStartPoint < 1 || numberStartPoint > 8)) { //added logical operators
+  if (!isOnBoard(letterStartPoint, numberStartPoint)) {
     std::cout << "The start point is not on the board" << std::endl;
   } else {
     std::cout << "The start point is on the board" << std::endl;
@@ -25,14 +29,7 @@ int main() {
   int numberEndPoint;
   std::cin >> letterEndPoint >> numberEndPoint;
 
-  count = 0;
-  for (int i = 0; i < 8; i++) {
-    if (letter_coordinat[i] != letterEndPoint) {
-      count++;
-    }
-  }
-
-  if ((count == 8) || (numberEndPoint < 1 || numberEndPoint > 8) || (numberEndPoint == numberStartPoint && letterEndPoint == letterStartPoint)) { //fixed condition
+  if (!isOnBoard(letterEndPoint, numberEndPoint) || (numberEndPoint == numberStartPoint && letterEndPoint == letterStartPoint)) {
     std::cout << "The end point is not on the board" << std::endl;
   } else {
     std::cout << "The end point is on the board" << std::endl;
