@@ -14,7 +14,7 @@ int main() {
     }
   }
 
-  if ((count == 8) || (numberStartPoint < 1 || numberStartPoint > 8)) {
+  if ((count == 8) || (numberStartPoint < 1 || numberStartPoint > 8)) { //added logical operators
     std::cout << "The start point is not on the board" << std::endl;
   } else {
     std::cout << "The start point is on the board" << std::endl;
@@ -32,7 +32,7 @@ int main() {
     }
   }
 
-  if ((count == 8) || (numberEndPoint < 1 || numberEndPoint > 8 || (numberEndPoint == numberStartPoint && letterEndPoint == letterStartPoint))) {
+  if ((count == 8) || (numberEndPoint < 1 || numberEndPoint > 8) || (numberEndPoint == numberStartPoint && letterEndPoint == letterStartPoint)) { //fixed condition
     std::cout << "The end point is not on the board" << std::endl;
   } else {
     std::cout << "The end point is on the board" << std::endl;
