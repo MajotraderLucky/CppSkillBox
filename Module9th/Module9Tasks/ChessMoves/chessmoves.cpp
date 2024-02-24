@@ -1,5 +1,6 @@
 #include <iostream>
 #include "chessmoves.h"
+#include <cmath>
 
 // Function to check if a point is within the board
 bool isOnBoard(char letter, int number) {
@@ -13,4 +14,13 @@ bool isOnBoard(char letter, int number) {
 
   // Check that the number is in the range from 1 to 8 and the letter is in the array
   return !(count == 8 || number < 1 || number > 8);
+}
+
+bool isKnightMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint) {
+    // Calculate the difference between the start and end coordinates.
+    int dx = std::abs(letterStartPoint - letterEndPoint);
+    int dy = std::abs(numberStartPoint - numberEndPoint);
+    
+    // Check if the move is valid for a knight.
+    return (dx == 2 && dy == 1) || (dx == 1 && dy == 2);
 }

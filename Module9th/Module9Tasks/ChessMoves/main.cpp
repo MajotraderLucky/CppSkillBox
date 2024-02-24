@@ -2,15 +2,6 @@
 #include <cmath>
 #include "chessmoves.h"
 
-bool isKnightMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint) {
-    // Calculate the difference between the start and end coordinates.
-    int dx = std::abs(letterStartPoint - letterEndPoint);
-    int dy = std::abs(numberStartPoint - numberEndPoint);
-    
-    // Check if the move is valid for a knight.
-    return (dx == 2 && dy == 1) || (dx == 1 && dy == 2);
-}
-
 int main() {
   std::cout << "Enter a start point on the chess board" << std::endl;
   char letterStartPoint;
