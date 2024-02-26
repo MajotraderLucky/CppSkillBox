@@ -37,3 +37,11 @@ bool isKingMove(char letterStartPoint, int numberStartPoint, char letterEndPoint
         return false;
     }
 }
+
+// Function to check if a move corresponds to a rook's move in chess
+bool isRookMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint) {
+    // A rook's move in chess corresponds to either a horizontal or a vertical movement.
+    // Therefore, if the start and end points match vertically (by letter) or horizontally (by number),
+    // it means the move was made by a rook.
+    return letterStartPoint == letterEndPoint || numberStartPoint == numberEndPoint;
+}
