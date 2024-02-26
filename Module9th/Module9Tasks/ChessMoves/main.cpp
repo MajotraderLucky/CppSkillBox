@@ -1,6 +1,14 @@
 #include <iostream>
 #include "chessmoves.h"
 
+// Function to check if the move corresponds to the chess bishop's move
+bool isBishopMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint) {
+    // In chess, a bishop's move corresponds to diagonal movement.
+    // This means that the absolute difference between the start and end points horizontally (letters)
+    // should be equal to the absolute difference between the start and end points vertically (numbers).
+    return std::abs(letterStartPoint - letterEndPoint) == std::abs(numberStartPoint - numberEndPoint);
+}
+
 int main() {
   std::cout << "Enter a start point on the chess board" << std::endl;
   char letterStartPoint;
@@ -32,6 +40,7 @@ int main() {
   bool isKnightMoveValid = isKnightMove(letterStartPoint, numberStartPoint, letterEndPoint, numberEndPoint);
   bool isKingMoveValid = isKingMove(letterStartPoint, numberStartPoint, letterEndPoint, numberEndPoint);
   bool isRookMoveValid = isRookMove(letterStartPoint, numberStartPoint, letterEndPoint, numberEndPoint);
+  bool isBishopMoveValid = isBishopMove(letterStartPoint, numberStartPoint, letterEndPoint, numberEndPoint);
 
   if (isStartPointValid && isEndPointValid) {
     std::cout << "The move of the figure is valid" << std::endl;
@@ -39,6 +48,7 @@ int main() {
     std::cout << "isKnightMoveValid: " << isKnightMoveValid << std::endl;
     std::cout << "isKingMoveValid: " << isKingMoveValid << std::endl;
     std::cout << "isRookMoveValid: " << isRookMoveValid << std::endl;
+    std::cout << "isBishopMoveValid: " << isBishopMoveValid << std::endl;
 
   } else {
     std::cout << "The move of the figure is not valid" << std::endl;
