@@ -1,6 +1,17 @@
 #include <iostream>
 #include "chessmoves.h"
 
+// Function to check if the move corresponds to the chess queen's move
+bool isQueenMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint) {
+    // In chess, a queen can move any number of squares along a rank, file, or diagonal.
+    // This means that the move is valid if the start and end points are on the same rank (letter),
+    // same file (number), or on a diagonal (the absolute difference between the start and end points
+    // horizontally (letters) is equal to the absolute difference vertically (numbers)).
+    return letterStartPoint == letterEndPoint ||
+           numberStartPoint == numberEndPoint ||
+           std::abs(letterStartPoint - letterEndPoint) == std::abs(numberStartPoint - numberEndPoint);
+}
+
 int main() {
   std::cout << "Enter a start point on the chess board" << std::endl;
   char letterStartPoint;
@@ -33,6 +44,7 @@ int main() {
   bool isKingMoveValid = isKingMove(letterStartPoint, numberStartPoint, letterEndPoint, numberEndPoint);
   bool isRookMoveValid = isRookMove(letterStartPoint, numberStartPoint, letterEndPoint, numberEndPoint);
   bool isBishopMoveValid = isBishopMove(letterStartPoint, numberStartPoint, letterEndPoint, numberEndPoint);
+  bool isQueenMoveValid = isQueenMove(letterStartPoint, numberStartPoint, letterEndPoint, numberEndPoint);
 
   if (isStartPointValid && isEndPointValid) {
     std::cout << "The move of the figure is valid" << std::endl;
@@ -41,6 +53,7 @@ int main() {
     std::cout << "isKingMoveValid: " << isKingMoveValid << std::endl;
     std::cout << "isRookMoveValid: " << isRookMoveValid << std::endl;
     std::cout << "isBishopMoveValid: " << isBishopMoveValid << std::endl;
+    std::cout << "isQueenMoveValid: " << isQueenMoveValid << std::endl;
 
   } else {
     std::cout << "The move of the figure is not valid" << std::endl;
