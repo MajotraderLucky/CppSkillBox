@@ -45,3 +45,11 @@ bool isRookMove(char letterStartPoint, int numberStartPoint, char letterEndPoint
     // it means the move was made by a rook.
     return letterStartPoint == letterEndPoint || numberStartPoint == numberEndPoint;
 }
+
+// Function to check if the move corresponds to the chess bishop's move
+bool isBishopMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint) {
+    // In chess, a bishop's move corresponds to diagonal movement.
+    // This means that the absolute difference between the start and end points horizontally (letters)
+    // should be equal to the absolute difference between the start and end points vertically (numbers).
+    return std::abs(letterStartPoint - letterEndPoint) == std::abs(numberStartPoint - numberEndPoint);
+}
