@@ -6,3 +6,4 @@ bool isKnightMove(char letterStartPoint, int numberStartPoint, char letterEndPoi
 bool isKingMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint);
 bool isRookMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint);
 bool isBishopMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint);
+bool isQueenMove(char letterStartPoint, int numberStartPoint, char letterEndPoint, int numberEndPoint);
