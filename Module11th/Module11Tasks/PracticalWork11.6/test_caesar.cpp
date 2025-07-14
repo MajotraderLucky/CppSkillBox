@@ -11,11 +11,11 @@ string encrypt_caesar(string text, int shift) {
         char ch = text[i];
         
         if (ch >= 'A' && ch <= 'Z') {
-            int shifted = (ch - 'A' + shift) % 26;
+            int shifted = (ch - 'A' + shift % 26 + 26) % 26;
             result += (char)('A' + shifted);
         }
         else if (ch >= 'a' && ch <= 'z') {
-            int shifted = (ch - 'a' + shift) % 26;
+            int shifted = (ch - 'a' + shift % 26 + 26) % 26;
             result += (char)('a' + shifted);
         }
         else {
@@ -124,6 +124,34 @@ void test_numbers_and_spaces() {
     cout << "✅ Пройден" << endl;
 }
 
+void test_negative_shifts() {
+    cout << "\n=== Тестирование отрицательных сдвигов ===" << endl;
+    
+    // Тест 14: Отрицательный сдвиг -3
+    string test14 = encrypt_caesar("ddd", -3);
+    cout << "Тест 14 - ddd с кодом -3: " << test14 << endl;
+    assert(test14 == "aaa");
+    cout << "✅ Пройден" << endl;
+    
+    // Тест 15: Отрицательный сдвиг с зацикливанием
+    string test15 = encrypt_caesar("abc", -3);
+    cout << "Тест 15 - abc с кодом -3: " << test15 << endl;
+    assert(test15 == "xyz");
+    cout << "✅ Пройден" << endl;
+    
+    // Тест 16: Большой отрицательный сдвиг
+    string test16 = encrypt_caesar("def", -29); // -29 % 26 = -3
+    cout << "Тест 16 - def с кодом -29: " << test16 << endl;
+    assert(test16 == "abc");
+    cout << "✅ Пройден" << endl;
+    
+    // Тест 17: Смешанный регистр с отрицательным сдвигом
+    string test17 = encrypt_caesar("DEF", -3);
+    cout << "Тест 17 - DEF с кодом -3: " << test17 << endl;
+    assert(test17 == "ABC");
+    cout << "✅ Пройден" << endl;
+}
+
 int main() {
     cout << "🔧 ТЕСТИРОВАНИЕ ШИФРА ЦЕЗАРЯ 🔧" << endl;
     cout << "=================================" << endl;
@@ -134,9 +162,10 @@ int main() {
         test_alphabet_wrapping();
         test_case_preservation();
         test_numbers_and_spaces();
+        test_negative_shifts();
         
         cout << "\n🎉 ВСЕ ТЕСТЫ ПРОЙДЕНЫ УСПЕШНО! 🎉" << endl;
-        cout << "Функция encrypt_caesar работает корректно." << endl;
+        cout << "Функция encrypt_caesar работает корректно с положительными и отрицательными сдвигами." << endl;
         
     } catch (const exception& e) {
         cout << "\n❌ ТЕСТ НЕ ПРОЙДЕН!" << endl;

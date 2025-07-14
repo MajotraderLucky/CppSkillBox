@@ -10,11 +10,11 @@ string encrypt_caesar(string text, int shift) {
         char ch = text[i];
         
         if (ch >= 'A' && ch <= 'Z') {
-            int shifted = (ch - 'A' + shift) % 26;
+            int shifted = (ch - 'A' + shift % 26 + 26) % 26;
             result += (char)('A' + shifted);
         }
         else if (ch >= 'a' && ch <= 'z') {
-            int shifted = (ch - 'a' + shift) % 26;
+            int shifted = (ch - 'a' + shift % 26 + 26) % 26;
             result += (char)('a' + shifted);
         }
         else {
