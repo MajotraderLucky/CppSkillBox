@@ -1,5 +1,51 @@
 #include <iostream>
 
+// Функция для построения кучи (heapify)
+void heapify(float arr[], int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    
+    // Если левый потомок больше корня
+    if (left < n && arr[left] > arr[largest]) {
+        largest = left;
+    }
+    
+    // Если правый потомок больше самого большого элемента
+    if (right < n && arr[right] > arr[largest]) {
+        largest = right;
+    }
+    
+    // Если самый большой элемент не корень
+    if (largest != i) {
+        float temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+        
+        // Рекурсивно строим кучу для поддерева
+        heapify(arr, n, largest);
+    }
+}
+
+// Основная функция пирамидальной сортировки
+void heapSort(float arr[], int n) {
+    // Построение кучи (перегруппировка массива)
+    for (int i = n / 2 - 1; i >= 0; --i) {
+        heapify(arr, n, i);
+    }
+    
+    // Извлечение элементов из кучи по одному
+    for (int i = n - 1; i > 0; --i) {
+        // Перемещаем текущий корень в конец
+        float temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        
+        // Вызываем heapify на уменьшенной куче
+        heapify(arr, i, 0);
+    }
+}
+
 int main() {
     const int SIZE = 15;
     float numbers[SIZE];
@@ -10,30 +56,16 @@ int main() {
         std::cin >> numbers[i];
     }
     
-    // Пузырьковая сортировка по убыванию с оптимизацией
-    bool swapped;
-    for (int i = 0; i < SIZE - 1; ++i) {
-        swapped = false;
-        for (int j = 0; j < SIZE - i - 1; ++j) {
-            if (numbers[j] < numbers[j + 1]) {
-                // Обмен элементов
-                float temp = numbers[j];
-                numbers[j] = numbers[j + 1];
-                numbers[j + 1] = temp;
-                swapped = true;
-            }
-        }
-        // Если обменов не было, массив отсортирован
-        if (!swapped) {
-            break;
-        }
-    }
+    // Пирамидальная сортировка (HeapSort)
+    // Гарантированная сложность: O(n log n), что меньше O(n^2)
+    heapSort(numbers, SIZE);
     
-    // Вывод отсортированных чисел
+    // Так как HeapSort сортирует по возрастанию, а нам нужно по убыванию,
+    // выводим массив в обратном порядке
     std::cout << "Числа в порядке убывания:" << std::endl;
-    for (int i = 0; i < SIZE; ++i) {
+    for (int i = SIZE - 1; i >= 0; --i) {
         std::cout << numbers[i];
-        if (i < SIZE - 1) {
+        if (i > 0) {
             std::cout << " ";
         }
     }
