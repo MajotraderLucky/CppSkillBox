@@ -4,6 +4,27 @@
 
 **Спецификация:** см. `../../docs/lessons/M13/L6_HWORK.md` (полный текст hwork со Skillbox)
 
+## Submission links для преподавателя
+
+Replit (тот же паттерн что использовался для M12 — `#<file_path>` deep-link):
+
+| Task | Replit URL                                                                                                       |
+|------|------------------------------------------------------------------------------------------------------------------|
+| 1    | <https://replit.com/@SierghieiRiaza1/CppSkillBox#Module13th/Module13Hwork/Task1_RemoveX/main.cpp>                |
+| 2    | <https://replit.com/@SierghieiRiaza1/CppSkillBox#Module13th/Module13Hwork/Task2_PricesItems/main.cpp>            |
+| 3    | <https://replit.com/@SierghieiRiaza1/CppSkillBox#Module13th/Module13Hwork/Task3_RingBuffer/main.cpp>             |
+
+Backup (GitHub blob URLs — если Replit недоступен):
+
+| Task | GitHub URL                                                                                                       |
+|------|------------------------------------------------------------------------------------------------------------------|
+| 1    | <https://github.com/MajotraderLucky/CppSkillBox/blob/master/Module13th/Module13Hwork/Task1_RemoveX/main.cpp>     |
+| 2    | <https://github.com/MajotraderLucky/CppSkillBox/blob/master/Module13th/Module13Hwork/Task2_PricesItems/main.cpp> |
+| 3    | <https://github.com/MajotraderLucky/CppSkillBox/blob/master/Module13th/Module13Hwork/Task3_RingBuffer/main.cpp>  |
+
+Replit Repl содержит весь репозиторий (синхронизирован с GitHub через `git pull` 2026-05-03).
+21/21 tests pass в Replit environment (verified).
+
 ## Структура
 
 ```text
