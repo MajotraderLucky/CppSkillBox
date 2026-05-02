@@ -1,1 +1,11 @@
 .vscode/
+
+# Compiled task binaries (Module*/Task*/<binary_no_extension>)
+Module*/**/Task*/[a-z_]*
+!Module*/**/Task*/*.cpp
+!Module*/**/Task*/*.h
+!Module*/**/Task*/*.hpp
+!Module*/**/Task*/*.md
+!Module*/**/Task*/*.txt
+!Module*/**/Task*/*.sh
+!Module*/**/Task*/CMakeLists.txt
