@@ -9,3 +9,8 @@ Module*/**/Task*/[a-z_]*
 !Module*/**/Task*/*.txt
 !Module*/**/Task*/*.sh
 !Module*/**/Task*/CMakeLists.txt
+!Module*/**/Task*/include/
+!Module*/**/Task*/src/
+
+# CMake build artifacts inside tasks
+Module*/**/Task*/build/
