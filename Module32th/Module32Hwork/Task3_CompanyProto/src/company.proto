@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package skillbox.m32;
+
+// Информация о предприятии — модель данных задания M32.5 #3.
+message Company {
+    // Обязательные поля
+    required int32  founded_year   = 1;   // год основания (32-битное целое)
+    required string legal_address  = 2;   // юридический адрес
+    required string name           = 3;   // название
+
+    // Опциональные поля
+    optional string activity            = 4;   // род деятельности
+    optional bool   foreign_economic    = 5;   // ВЭД
+}
