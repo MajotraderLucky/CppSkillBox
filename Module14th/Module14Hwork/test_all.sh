@@ -8,7 +8,7 @@ OVERALL_FAIL=0
 OVERALL_TOTAL=0
 FAILED_TASKS=""
 
-for task in Task1_Banquet Task2_TicTacToe Task3_Matrices Task4_MatVec Task5_BubbleWrap; do
+for task in Task1_Banquet Task2_TicTacToe Task3_Matrices Task4_MatVec Task5_BubbleWrap Task8_Battleship; do
     echo ""
     echo "============================================================"
     echo "  Running: $task"

@@ -1,15 +1,15 @@
 # Module 14.6 — Практическая работа (homework)
 
-**Status:** code готов, 70/70 tests pass, **submit blocked** (Skillbox support отключён → `access="read_only"`)
+**Status:** code готов, 78/78 tests pass, **submit blocked** (Skillbox support отключён → `access="read_only"`)
 **Спецификация:** см. `../../docs/lessons/M14/L6_HWORK.md`
-**Solved:** 5 mandatory tasks (минимум для зачёта)
+**Solved:** 5 mandatory + Task 8 (Морской бой по разбору учителя M15.1)
 
 ## Структура
 
 ```text
 Module14Hwork/
 ├── README.md (этот файл)
-├── test_all.sh                          # batch runner (70 tests total)
+├── test_all.sh                          # batch runner (78 tests total)
 ├── Task1_Banquet/                       # массивы приборов/посуды/стульев
 │   ├── main.cpp                         # 13 tests
 │   └── test.sh
@@ -22,15 +22,18 @@ Module14Hwork/
 ├── Task4_MatVec/                        # matrix × vector
 │   ├── main.cpp                         # 11 tests
 │   └── test.sh
-└── Task5_BubbleWrap/                    # 12×12 region pop
-    ├── main.cpp                         # 18 tests
+├── Task5_BubbleWrap/                    # 12×12 region pop
+│   ├── main.cpp                         # 18 tests
+│   └── test.sh
+└── Task8_Battleship/                    # 10×10 морской бой (M15.1 разбор)
+    ├── main.cpp                         # 8 tests
     └── test.sh
 ```
 
 ## Сборка и тестирование
 
 ```bash
-# Все 5 задач
+# Все 6 задач (5 mandatory + Task 8)
 ./test_all.sh
 
 # Одна задача
@@ -88,17 +91,26 @@ cd Task1_Banquet && g++ -std=c++11 -Wall -Wextra main.cpp -o banquet
 | Tests          | 18 (full + single + partial + idempotent + reversed + 5 invalid + 4 edges) |
 | Status         | [+] PASS                                                                   |
 
+### Task 8 — Морской бой (Battleship)
+
+| Параметр       | Значение                                                                   |
+|----------------|----------------------------------------------------------------------------|
+| Алгоритм       | 2 поля 10×10 + addShip/playShips/attack по разбору учителя M15.1           |
+| Edge cases     | OOB, square ship, wrong size, collision, reversed coords swap              |
+| Tests          | 8 (full game P1 wins after 20 hits + 5 placement validations + invariants) |
+| Status         | [+] PASS                                                                   |
+
 ## Соответствие критериям hwork (из L6_HWORK.md)
 
-| Критерий                                   | Status          |
-|--------------------------------------------|-----------------|
-| В циклах нет выхода за границы массивов    | [+]             |
-| Повторяющиеся действия в функциях          | [+]             |
-| Программы запускаются без syntax errors    | [+]             |
-| Имена переменных корректные                | [+]             |
-| Текстовый интерфейс (кроме Task 1)         | [+]             |
-| Контроль ввода                             | [+] (Task2,3,5) |
-| Выполнено минимум 5 заданий                | [+] (5/5)       |
+| Критерий                                   | Status                        |
+|--------------------------------------------|-------------------------------|
+| В циклах нет выхода за границы массивов    | [+]                           |
+| Повторяющиеся действия в функциях          | [+]                           |
+| Программы запускаются без syntax errors    | [+]                           |
+| Имена переменных корректные                | [+]                           |
+| Текстовый интерфейс (кроме Task 1)         | [+]                           |
+| Контроль ввода                             | [+] (Task2,3,5,8)             |
+| Выполнено минимум 5 заданий                | [+] (5+1, Task 8 опционально) |
 
 ## Submission links для преподавателя
 
@@ -111,6 +123,7 @@ Replit (тот же паттерн что использовался для M12 
 | 3    | <https://replit.com/@SierghieiRiaza1/CppSkillBox#Module14th/Module14Hwork/Task3_Matrices/main.cpp>                        |
 | 4    | <https://replit.com/@SierghieiRiaza1/CppSkillBox#Module14th/Module14Hwork/Task4_MatVec/main.cpp>                          |
 | 5    | <https://replit.com/@SierghieiRiaza1/CppSkillBox#Module14th/Module14Hwork/Task5_BubbleWrap/main.cpp>                      |
+| 8    | <https://replit.com/@SierghieiRiaza1/CppSkillBox#Module14th/Module14Hwork/Task8_Battleship/main.cpp>                      |
 
 Backup (GitHub blob URLs):
 
@@ -121,15 +134,16 @@ Backup (GitHub blob URLs):
 | 3    | <https://github.com/MajotraderLucky/CppSkillBox/blob/master/Module14th/Module14Hwork/Task3_Matrices/main.cpp>             |
 | 4    | <https://github.com/MajotraderLucky/CppSkillBox/blob/master/Module14th/Module14Hwork/Task4_MatVec/main.cpp>               |
 | 5    | <https://github.com/MajotraderLucky/CppSkillBox/blob/master/Module14th/Module14Hwork/Task5_BubbleWrap/main.cpp>           |
+| 8    | <https://github.com/MajotraderLucky/CppSkillBox/blob/master/Module14th/Module14Hwork/Task8_Battleship/main.cpp>           |
 
 После git pull в Replit (как делалось для M13.6) — все файлы доступны по deep-link.
 
-## Дополнительные задачи (не реализованы)
+## Дополнительные задачи
 
-В hwork есть 3 опциональные задачи (для бонусных баллов или практики):
+Опциональные задачи в hwork (для бонусных баллов или практики):
 
-- Task 6 — Проход змейкой (без if-условий, formula-based)
-- Task 7 — Почти Майнкрафт (3D массив + slice)
-- Task 8 — Морской бой (10×10, ships, attacks)
+- Task 6 — Проход змейкой (без if-условий, formula-based) — не реализовано
+- Task 7 — Почти Майнкрафт (3D массив + slice) — не реализовано
+- Task 8 — Морской бой (10×10, ships, attacks) — **[+] реализовано** по разбору учителя M15.1
 
-Минимум для зачёта — **5 mandatory** (выполнено).
+Минимум для зачёта — **5 mandatory** (выполнено) + Task 8 как бонус.
